@@ -1,0 +1,8 @@
+//
+// Created by Enzod on 18-04-2026.
+//
+
+#ifndef TALLEREDD_GESTORARCHIVOS_H
+#define TALLEREDD_GESTORARCHIVOS_H
+
+#endif //TALLEREDD_GESTORARCHIVOS_H
