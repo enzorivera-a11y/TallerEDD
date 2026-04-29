@@ -4,4 +4,8 @@ add_executable(TallerEDD
         classes/GestorArchivos.cpp
         classes/Reproductor.cpp
         core/menu.cpp
+        classes/Cancion.h
+        data_structures/Nodo.h
+        data_structures/ListaEnlazada.h
+        classes/GestorArchivos.h
 )

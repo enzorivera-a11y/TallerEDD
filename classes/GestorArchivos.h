@@ -1,8 +1,16 @@
-//
-// Created by Enzod on 18-04-2026.
-//
+
 
 #ifndef TALLEREDD_GESTORARCHIVOS_H
 #define TALLEREDD_GESTORARCHIVOS_H
+
+#include "Cancion.h"
+#include "../data_Structures/ListaEnlazada.h"
+
+class GestorArchivos
+{
+    public:
+    ListaEnlazada<Cancion> cargarCanciones();
+};
+
 
 #endif //TALLEREDD_GESTORARCHIVOS_H
