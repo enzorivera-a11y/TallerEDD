@@ -8,4 +8,5 @@ add_executable(TallerEDD
         data_structures/Nodo.h
         data_structures/ListaEnlazada.h
         classes/GestorArchivos.h
+        core/menu.h
 )
