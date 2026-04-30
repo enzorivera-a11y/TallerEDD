@@ -38,7 +38,7 @@ menu::menuInicial(Reproductor& reproductor)
             cout << "Hasta la próxima"<< endl;
             break;
         default:
-            cout << "Opción no válida"<< endl;
+            cout << "Opción totalmente no válida"<< endl;
 
         }
     } while (opcion != "X");
