@@ -20,6 +20,10 @@ class ListaEnlazada {
         num = 0;
     }
 
+    Nodo<T>* getCabeza() {
+        return inicio;
+    }
+
     void insertarFinal(T dato)
     {
         Nodo<T>* nodoNuevo = new Nodo<T>(dato);

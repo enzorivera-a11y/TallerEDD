@@ -21,6 +21,9 @@ public:
     Cancion();
 
     Cancion(int id, string nombre, string artista, string album, int agno, int duracion, string ubi_arch);
+
+    string getNombre();
+    string getArtista();
 };
 
 
