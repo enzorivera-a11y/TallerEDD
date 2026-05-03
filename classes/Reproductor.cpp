@@ -8,6 +8,11 @@
 
 using namespace std;
 
+void Reproductor::setLista(ListaEnlazada<Cancion> lista) {
+    this->lista = lista;
+    this->actual = this->lista.getCabeza();
+}
+
 Reproductor::Reproductor() {
     actual = nullptr;
     Playing =false;
@@ -113,3 +118,5 @@ bool Reproductor::getMix() {
 int Reproductor::getRepeatMode() {
     return RepeatMode;
 }
+
+

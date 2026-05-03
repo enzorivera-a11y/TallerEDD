@@ -1,51 +1,79 @@
 #include <iostream>
 #include <cctype>
-using namespace std;
 #include "Menu.h"
+#include "../classes/Reproductor.h"
 
-menu::menuInicial(Reproductor& reproductor)
+using namespace std;
+
+void menuInicial(Reproductor& reproductor)
 {
-    do
-    {
-        cout << "Bienvenido a nuestro Reproductor \n"
-        << "Qué quieres hacer hoy? \n"
-        << "Reproducir/Pausar (W) \n"
-        << "Anterior (Q) \n"
-        << "Siguiente (E) \n"
-        << "Aleatorio (S) \n"
-        << "Repetición (R) \n"
-        << "Menú de playlist (A) \n"
-        << "Menú de canciones (L) \n"
-        << "Salir (X) \n";
+    char opcion;
+    cout<< "\n=====Bienvenido a nuestro Reproductor=====\n"
+    <<"Que deseas hacer hoy?"<<endl;
 
-        cout << "Elija una opción: " << endl;
-        char opcion;
+    do {
+        cout
+             << "Reproducir/Pausar (W)\n"
+             << "Anterior (Q)\n"
+             << "Siguiente (E)\n"
+             << "Aleatorio (S)\n"
+             << "Repeticion (R)\n"
+             << "Menu de playlist (A)\n"
+             << "Menu de canciones (L)\n"
+             << "Salir (X)\n"
+        <<"Elija una opcion: ";
+
         cin >> opcion;
-
         opcion = toupper(opcion);
 
         switch (opcion)
         {
         case 'W':
+            reproductor.playPause();
+            reproductor.mostrarActual();
+            break;
+
         case 'Q':
+            reproductor.Back();
+            reproductor.mostrarActual();
+            break;
+
         case 'E':
+            reproductor.Next();
+            reproductor.mostrarActual();
+            break;
+
         case 'S':
+            reproductor.toggleMixRand();
+            break;
+
         case 'R':
+            reproductor.ChangeRepeatMode();
+            break;
 
         case 'A':
-        case 'L':
-        case 'X':
-            cout << "Hasta la próxima"<< endl;
+            menuPlaylist(reproductor);
             break;
+
+        case 'L':
+            menuCanciones(reproductor);
+            break;
+
+        case 'X':
+            cout << "Hasta la próxima\n";
+            break;
+
         default:
-            cout << "Opción totalmente no válida"<< endl;
-
+            cout << "Opción no válida\n";
         }
-    } while (opcion != "X");
 
+    } while (opcion != 'X');
 }
 
+void menuPlaylist(Reproductor& reproductor) {
+    cout << "Menú playlist no implementado aún\n";
+}
 
-
-
-
+void menuCanciones(Reproductor& reproductor) {
+    cout << "Menú canciones no implementado aún\n";
+}

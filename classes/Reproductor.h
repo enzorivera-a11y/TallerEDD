@@ -5,20 +5,19 @@
 #ifndef TALLEREDD_REPRODUCTOR_H
 #define TALLEREDD_REPRODUCTOR_H
 
-#endif //TALLEREDD_REPRODUCTOR_H
-
 #include "../data_structures/ListaEnlazada.h"
 #include "Cancion.h"
 
 class Reproductor {
-    private:
+private:
     ListaEnlazada<Cancion> lista;
     Nodo<Cancion>* actual;
 
     bool Playing;
     bool mixRand;
     int RepeatMode;
-    public:
+
+public:
     Reproductor();
 
     void setLista(ListaEnlazada<Cancion> lista);
@@ -32,7 +31,6 @@ class Reproductor {
 
     void mostrarActual();
 
-    // funciones para el status.ctg (en revision)
     int getIndexActual();
     bool getPlaying();
     bool getMix();
@@ -40,3 +38,5 @@ class Reproductor {
 
     void SetEstado(int index,bool play,bool mix,int repeat);
 };
+
+#endif
