@@ -119,4 +119,25 @@ int Reproductor::getRepeatMode() {
     return RepeatMode;
 }
 
+ListaEnlazada<Cancion>& Reproductor::getLista() {
+    return lista;
+}
+void Reproductor::moverseHaciaCancion(int pos)
+{
+    if (lista.tamano() == 0) {
+        return;
+    }
+
+    if (pos >= 0 && pos < lista.tamano()) {
+        actual = lista.getCabeza();
+
+        for (int i=0;i<pos;i++)
+        {
+            actual=actual->next;
+        }
+        Playing = true;
+    }
+}
+
+
 

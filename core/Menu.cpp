@@ -2,6 +2,7 @@
 #include <cctype>
 #include "Menu.h"
 #include "../classes/Reproductor.h"
+#include "../data_structures//ListaEnlazada.h"
 
 using namespace std;
 
@@ -71,7 +72,51 @@ void menuInicial(Reproductor& reproductor)
 }
 
 void menuPlaylist(Reproductor& reproductor) {
-    cout << "Menú playlist no implementado aún\n";
+    cout << "===Bienvenido al Menu Playlist\n";
+    ListaEnlazada<Cancion> lista = reproductor.getLista();
+    char opcion;
+    int pos;
+
+    cout << "Actual: ";
+    reproductor.mostrarActual();
+    /*Actual: canción actual - artista*/
+    cout  << "Lista de Reproduccion Actual: \n";
+    if (lista.tamano() != 0)
+    {
+        for (int i = 0; i < lista.tamano(); i++)
+        {
+            Cancion song = lista.obtener(i);
+
+            cout << song.getNombre() << " - " << song.getArtista()<<endl;
+        }
+    }else
+    {
+        cout <<"Lista de Reproducción actual: \n";
+        cout << "Vacía \n";
+        cout << "\n=Opciones=:\n";
+        cout << "V: Volver\n";
+        cout << "Elija una opcion: ";
+        cin >> opcion;
+        opcion = toupper(opcion);
+    }
+    cout << "\n=Opciones=\n";
+    cout << "S<num>: Saltar a la cancion\n";
+    cout << "V: Volver\n";
+    cout << "Elija una opcion: ";
+
+    cin >> opcion;
+    opcion = toupper(opcion);
+
+    if (opcion == 'V') {return;}
+    if (opcion == 'S')
+    {
+        cin >> pos;
+
+        if (pos >= 1 && pos <= lista.tamano())
+        {
+            reproductor.moverseHaciaCancion(pos-1);
+        }else{ cout << "Posicion inválida\n";}
+    }else{cout << "Opción inválida \n";}
 }
 
 void menuCanciones(Reproductor& reproductor) {

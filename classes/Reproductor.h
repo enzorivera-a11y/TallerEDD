@@ -20,7 +20,9 @@ private:
 public:
     Reproductor();
 
+    ListaEnlazada<Cancion>& getLista();
     void setLista(ListaEnlazada<Cancion> lista);
+    void moverseHaciaCancion(int pos);
 
     void playPause();
     void Next();
@@ -38,5 +40,6 @@ public:
 
     void SetEstado(int index,bool play,bool mix,int repeat);
 };
+
 
 #endif

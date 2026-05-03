@@ -10,8 +10,6 @@ int main() {
 
     ListaEnlazada<Cancion> canciones = gestor.cargarCanciones();
 
-    cout << "Canciones cargadas: " << canciones.tamano() << endl;
-
     Reproductor reproductor;
     reproductor.setLista(canciones);
 

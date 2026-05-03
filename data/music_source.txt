@@ -1,2 +1,20 @@
-1,Fire Dance,Vivid BAD Squad,Fire Dance Single,2025,210,C:/musica/fire_dance.mp3
-2,Show,Ado,Show Single,2022,190,C:/musica/show.mp3
+1,Blinding Lights,The Weeknd,After Hours,2020,200,C:/musica/blinding_lights.mp3
+2,Levitating,Dua Lipa,Future Nostalgia,2020,203,C:/musica/levitating.mp3
+3,Peaches,Justin Bieber,Justice,2021,198,C:/musica/peaches.mp3
+4,Save Your Tears,The Weeknd,After Hours,2020,215,C:/musica/save_your_tears.mp3
+5,Stay,The Kid LAROI,Stay,2021,141,C:/musica/stay.mp3
+6,As It Was,Harry Styles,Harry's House,2022,167,C:/musica/as_it_was.mp3
+7,Heat Waves,Glass Animals,Dreamland,2020,238,C:/musica/heat_waves.mp3
+8,Good 4 U,Olivia Rodrigo,SOUR,2021,178,C:/musica/good_4_u.mp3
+9,Industry Baby,Lil Nas X,Montero,2021,212,C:/musica/industry_baby.mp3
+10,Watermelon Sugar,Harry Styles,Fine Line,2019,174,C:/musica/watermelon_sugar.mp3
+11,Shivers,Ed Sheeran,Equals,2021,207,C:/musica/shivers.mp3
+12,Bad Habits,Ed Sheeran,Equals,2021,231,C:/musica/bad_habits.mp3
+13,Montero,Lil Nas X,Montero,2021,137,C:/musica/montero.mp3
+14,Senorita,Shawn Mendes,Romance,2019,191,C:/musica/senorita.mp3
+15,Closer,The Chainsmokers,Collage,2016,244,C:/musica/closer.mp3
+16,Counting Stars,OneRepublic,Native,2013,257,C:/musica/counting_stars.mp3
+17,Someone You Loved,Lewis Capaldi,Divinely Uninspired,2019,182,C:/musica/someone_you_loved.mp3
+18,Perfect,Ed Sheeran,Divide,2017,263,C:/musica/perfect.mp3
+19,Rolling in the Deep,Adele,21,2011,228,C:/musica/rolling_in_the_deep.mp3
+20,Shape of You,Ed Sheeran,Divide,2017,233,C:/musica/shape_of_you.mp3
