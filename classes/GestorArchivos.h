@@ -19,7 +19,3 @@ class GestorArchivos
 
 
 #endif //TALLEREDD_GESTORARCHIVOS_H
-
-
-
-#endif //TALLEREDD_GESTORARCHIVOS_H
