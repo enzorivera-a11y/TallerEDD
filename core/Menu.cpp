@@ -8,6 +8,8 @@ using namespace std;
 
 void menuInicial(Reproductor& reproductor)
 {
+    GestorArchivos gestor;
+    
     char opcion;
     cout<< "\n=====Bienvenido a nuestro Reproductor=====\n"
     <<"Que deseas hacer hoy?"<<endl;
@@ -32,24 +34,29 @@ void menuInicial(Reproductor& reproductor)
         case 'W':
             reproductor.playPause();
             reproductor.mostrarActual();
+            gestor.guardarEstado(reproductor);
             break;
 
         case 'Q':
             reproductor.Back();
             reproductor.mostrarActual();
+            gestor.guardarEstado(reproductor);
             break;
 
         case 'E':
             reproductor.Next();
             reproductor.mostrarActual();
+            gestor.guardarEstado(reproductor);
             break;
 
         case 'S':
             reproductor.toggleMixRand();
+            gestor.guardarEstado(reproductor);
             break;
 
         case 'R':
             reproductor.ChangeRepeatMode();
+            gestor.guardarEstado(reproductor);
             break;
 
         case 'A':
