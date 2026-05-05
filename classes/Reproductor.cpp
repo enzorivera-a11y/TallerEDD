@@ -56,7 +56,13 @@ void Reproductor::Back() {
 }
 
 void Reproductor::toggleMixRand() {
+    if (lista.tamano() == 0)
+    {
+        return;
+    }
+
     mixRand= !mixRand;
+
     if (mixRand) {
         cout<< "Mix ON"<< endl;
     }else {
