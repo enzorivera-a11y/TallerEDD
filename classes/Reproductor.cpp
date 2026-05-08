@@ -82,11 +82,19 @@ void Reproductor::mostrarActual() {
         return;
     }
 
-    cout << "Reproduciendo:"
+    if (Playing == false) {
+        cout << "En pausa:"
     << actual->dato.getNombre()
     << "-"
     << actual->dato.getArtista()
     << endl;
+    }else {
+        cout << "Reproduciendo:"
+    << actual->dato.getNombre()
+    << "-"
+    << actual->dato.getArtista()
+    << endl;
+    }
 
 }
 
