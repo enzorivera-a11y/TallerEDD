@@ -37,40 +37,47 @@ void menuInicial(Reproductor& reproductor)
             reproductor.playPause();
             reproductor.mostrarActual();
             gestor.guardarEstado(reproductor);
+            cout << "\n";
             break;
 
         case 'Q':
             reproductor.Back();
             reproductor.mostrarActual();
             gestor.guardarEstado(reproductor);
+            cout << "\n";
             break;
 
         case 'E':
             reproductor.Next();
             reproductor.mostrarActual();
             gestor.guardarEstado(reproductor);
+            cout << "\n";
             break;
 
         case 'S':
             reproductor.toggleMixRand();
             gestor.guardarEstado(reproductor);
+            cout << "\n";
             break;
 
         case 'R':
             reproductor.ChangeRepeatMode();
             gestor.guardarEstado(reproductor);
+            cout << "\n";
             break;
 
         case 'A':
             menuPlaylist(reproductor);
+            cout << "\n";
             break;
 
         case 'L':
             menuCanciones(reproductor);
+            cout << "\n";
             break;
 
         case 'X':
-            cout << "Hasta la próxima\n";
+            cout << "Hasta la proxima\n";
             break;
 
         default:
@@ -81,22 +88,21 @@ void menuInicial(Reproductor& reproductor)
 }
 
 void menuPlaylist(Reproductor& reproductor) {
-    cout << "===Bienvenido al Menu Playlist\n";
-    ListaEnlazada<Cancion> lista = reproductor.getLista();
+    cout << "===Bienvenido al Menu Playlist===\n";
+    ListaEnlazada<Cancion> playlist = reproductor.getPlaylist();
     char opcion;
     int pos;
 
-    cout << "Actual: ";
+    cout << "Cancion actual"<<endl;
     reproductor.mostrarActual();
-    /*Actual: canción actual - artista*/
     cout  << "Lista de Reproduccion Actual: \n";
-    if (lista.tamano() != 0)
+    if (playlist.tamano() != 0)
     {
-        for (int i = 0; i < lista.tamano(); i++)
+        for (int i = 0; i < playlist.tamano(); i++)
         {
-            Cancion song = lista.obtener(i);
+            Cancion song = playlist.obtener(i);
 
-            cout << song.getNombre() << " - " << song.getArtista()<<endl;
+            cout << i + 1 << ". " << song.getNombre() << " - " << song.getArtista()<<endl;
         }
     }else
     {
@@ -110,7 +116,7 @@ void menuPlaylist(Reproductor& reproductor) {
     }
     cout << "\n=Opciones=\n";
     cout << "S<num>: Saltar a la cancion\n";
-    cout << "V: Volver\n";
+    cout << "V: Volver al menu principal\n";
     cout << "Elija una opcion: ";
 
     cin >> opcion;
@@ -121,13 +127,97 @@ void menuPlaylist(Reproductor& reproductor) {
     {
         cin >> pos;
 
-        if (pos >= 1 && pos <= lista.tamano())
+        if (pos >= 1 && pos <= playlist.tamano())
         {
             reproductor.moverseHaciaCancion(pos-1);
         }else{ cout << "Posicion inválida\n";}
     }else{cout << "Opción inválida \n";}
 }
 
-void menuCanciones(Reproductor& reproductor) {
-    cout << "Menú canciones no implementado aún\n";
+void menuCanciones(Reproductor& reproductor)
+{
+    cout << "===Bienvenido al Menu de Canciones===\n";
+    ListaEnlazada<Cancion> lista = reproductor.getLista();
+    char opcion;
+    int pos;
+
+    cout << "Cancion actual"<<endl;
+    reproductor.mostrarActual();
+    cout  << "Canciones registradas: \n";
+    if (lista.tamano() != 0)
+    {
+        for (int i = 0; i < lista.tamano(); i++)
+        {
+            Cancion song = lista.obtener(i);
+
+            cout << i + 1 << ". " << song.getNombre() << " - " << song.getArtista()<<endl;
+        }
+    }else{
+        cout <<"Canciones registradas: \n";
+        cout << "Vacía \n";
+        cout << "\n=Opciones=:\n";
+        cout << "N: Agregar cancion al registro\n";
+        cout << "V: Volver\n";
+        cout << "Elija una opcion: ";
+        cin >> opcion;
+        opcion = toupper(opcion);
+
+        if (opcion == 'V') {return;}
+        if (opcion == 'N')
+        {
+
+        }
+
+    }
+    cout << "\n=Opciones=\n";
+    cout << "R<num>: Reproducir cancion seleccionada\n";
+    cout << "A<num>: Agregar cancion seleccionada al final de la lista\n";
+    cout << "N: Agregar cancion al registro\n";
+    cout << "D<num>: Eliminar cancion seleccionada\n";
+    cout << "V: Volver al menu principal\n";
+    cout << "Elija una opcion: ";
+
+
+    cin >> opcion;
+    opcion = toupper(opcion);
+
+        switch (opcion)
+        {
+        case 'R':
+            cin >> pos;
+            if (pos >= 1 && pos <= lista.tamano())
+            {
+                reproductor.playSong(pos-1);
+            }
+            else
+            {
+                cout << "Posicion invalida\n";
+            }
+            break;
+        case 'A':
+            cin >> pos;
+            if (pos >= 1 && pos <= lista.tamano())
+            {
+                reproductor.agregarSong(pos-1);
+            }
+            else
+            {
+                cout << "Posicion invalida\n";
+            }
+            break;
+        case 'N':
+            cout << "\n";
+            break;
+        case 'D':
+            cin >> pos;
+            cout << "\n";
+            break;
+        case 'V':
+            cout << "\n";
+            return;
+        default:
+            cout << "Opcion invalida o no disponible";
+        }
 }
+
+
