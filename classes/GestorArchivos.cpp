@@ -30,23 +30,9 @@ ListaEnlazada<Cancion> GestorArchivos::cargarCanciones()
         getline(ss, duracion, ',');
         getline(ss, ubi_arch, ',');
 
-        /*1,Fire Dance,Vivid BAD Squad,Fire Dance Single,2025,210,C:/musica/fire.mp3
-         *id = "1"
-         *nombre = "Fire Dance"
-         *artista = Vivid BAD Squad"
-         *album = "Fire Dance Single"
-         *agno = "2025"
-         *duracion = "210"
-         *ubi_arch = "C:/musica/fire.mp3" */
-
         Cancion song(stoi(id), nombre, artista, album, stoi(agno), stoi(duracion), ubi_arch );
 
         canciones.insertarFinal(song);
-
-
-
-
-
     }
     archivo.close();
 
@@ -55,7 +41,7 @@ ListaEnlazada<Cancion> GestorArchivos::cargarCanciones()
 
 void GestorArchivos::guardarEstado(Reproductor& rep)
 {
-    ofstream file("../data/status.cfg");
+    ofstream file("status.cfg");
 
     if (!file.is_open())
     {
@@ -63,17 +49,17 @@ void GestorArchivos::guardarEstado(Reproductor& rep)
         return;
     }
 
-    file << "current_song=" << rep.getIndexActual() << endl;
-    file << "is_playing=" << rep.getPlaying() << endl;
-    file << "shuffle=" << rep.getMix() << endl;
-    file << "repeat_mode=" << rep.getRepeatMode() << endl;
+    file << "Current=" << rep.getIndexActual() << endl;
+    file << "Playing=" << rep.getPlaying() << endl;
+    file << "Mix=" << rep.getMix() << endl;
+    file << "Repeat=" << rep.getRepeatMode() << endl;
 
     file.close();
 }
 
 void GestorArchivos::cargarEstado(Reproductor& rep)
 {
-    ifstream file("../data/status.cfg");
+    ifstream file("status.cfg");
 
     if (!file.is_open())
     {

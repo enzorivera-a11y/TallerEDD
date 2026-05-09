@@ -58,6 +58,34 @@ class ListaEnlazada {
         return current -> dato;
 
     }
+
+    void clean()
+    {
+        Nodo<T>* current = inicio;
+        while (current != nullptr)
+        {
+            Nodo<T>* temp = current;
+            current = current->next;
+            delete temp;
+        }
+        inicio = nullptr;
+        num = 0;
+
+    }
+
+    void mod(int pos, T data)
+    {
+        if (pos < 0 || pos >= num)
+        {
+            return;
+        }
+        Nodo<T>* current = inicio;
+        for (int i = 0; i < pos; i++)
+        {
+            current = current->next;
+        }
+        current -> dato = data;
+    }
 };
 
 #endif //TALLEREDD_LISTAENLAZADA_H

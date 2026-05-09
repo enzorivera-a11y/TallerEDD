@@ -11,6 +11,7 @@
 class Reproductor {
 private:
     ListaEnlazada<Cancion> lista;
+    ListaEnlazada<Cancion> playlist;
     Nodo<Cancion>* actual;
 
     bool Playing;
@@ -21,6 +22,7 @@ public:
     Reproductor();
 
     ListaEnlazada<Cancion>& getLista();
+    ListaEnlazada<Cancion>& getPlaylist();
     void setLista(ListaEnlazada<Cancion> lista);
     void moverseHaciaCancion(int pos);
 
@@ -33,12 +35,18 @@ public:
 
     void mostrarActual();
 
+    void agregarSong(int index);
+
     int getIndexActual();
     bool getPlaying();
     bool getMix();
+    string getState();
     int getRepeatMode();
 
     void SetEstado(int index,bool play,bool mix,int repeat);
+
+    void mezclarPL();
+    void playSong(int index);
 };
 
 
