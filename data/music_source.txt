@@ -1,6 +1,6 @@
-1,Blinding Lights,The Weeknd,After Hours,2020,200,C:/musica/blinding_lights.mp3
-2,Levitating,Dua Lipa,Future Nostalgia,2020,203,C:/musica/levitating.mp3
-3,Peaches,Justin Bieber,Justice,2021,198,C:/musica/peaches.mp3
+1,Fire Dance,Vivid BAD Squad,Fire Dance Single,2025,210,C:/musica/fire_dance.mp3
+2,Show,Ado,Show Single,2022,190,C:/musica/show.mp3
+3,Magic City (Reimagined),Icetuber,The Re/Now Re/Now,2026,710,C:/musica/Ice.mp3
 4,Save Your Tears,The Weeknd,After Hours,2020,215,C:/musica/save_your_tears.mp3
 5,Stay,The Kid LAROI,Stay,2021,141,C:/musica/stay.mp3
 6,As It Was,Harry Styles,Harry's House,2022,167,C:/musica/as_it_was.mp3
@@ -18,3 +18,4 @@
 18,Perfect,Ed Sheeran,Divide,2017,263,C:/musica/perfect.mp3
 19,Rolling in the Deep,Adele,21,2011,228,C:/musica/rolling_in_the_deep.mp3
 20,Shape of You,Ed Sheeran,Divide,2017,233,C:/musica/shape_of_you.mp3
+21,Stylo,Gorillaz,Plastic Beach,2010,430,C:/musica/stylo.mp3
