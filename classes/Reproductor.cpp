@@ -46,6 +46,10 @@ void Reproductor:: Next() {
 
         if (RepeatMode== 2) {
             actual = playlist.getCabeza();
+            if (mixRand)
+            {
+                mezclarRestantes();
+            }
         }else {
             cout << "Fin de la lista" << endl;
         }
@@ -57,7 +61,7 @@ void Reproductor::Back() {
 
     Nodo<Cancion>* temp= playlist.getCabeza();
 
-    while (temp->next != actual) {
+    while (temp!= nullptr && temp->next != actual) {
         temp = temp->next;
     }
 
@@ -65,18 +69,18 @@ void Reproductor::Back() {
 }
 
 void Reproductor::toggleMixRand() {
-    if (lista.tamano() == 0)
+    if (playlist.tamano() == 0 || actual == nullptr)
     {
         return;
     }
 
-    mixRand= !mixRand;
-    /*mezclar();*/
+    mixRand = !mixRand;
 
     if (mixRand) {
-        cout<< "Mix ON"<< endl;
-    }else {
-        cout<< "Mix OFF"<< endl;
+        mezclarRestantes();
+        cout << "Mix ON" << endl;
+    } else {
+        cout << "Mix OFF" << endl;
     }
 }
 
@@ -147,15 +151,19 @@ void Reproductor::mostrarActual() {
 }
 
 int Reproductor::getIndexActual() {
-    Nodo<Cancion>* temp= playlist.getCabeza();
-    int index= 0;
+    Nodo<Cancion>* temp = playlist.getCabeza();
+    int index = 0;
 
-    while (temp!= actual) {
+    while (temp != nullptr) {
+        if (temp == actual) {
+            return index;
+        }
+
         temp = temp->next;
         index++;
     }
 
-    return index;
+    return -1;
 }
 
 ListaEnlazada<Cancion>& Reproductor::getPlaylist()
@@ -219,13 +227,14 @@ void Reproductor::moverseHaciaCancion(int pos)
         return;
     }
 
-    if (pos >= 0 && pos < lista.tamano()) {
+    if (pos >= 0 && pos < playlist.tamano()) {
         actual = playlist.getCabeza();
 
-        for (int i=0;i<pos;i++)
+        for (int i = 0; i < pos; i++)
         {
-            actual=actual->next;
+            actual = actual->next;
         }
+
         Playing = true;
     }
 }
@@ -282,6 +291,42 @@ void Reproductor::playSong(int index)
     Playing = true;
 
     cout << "Cancion elegida ya en reproduccion\n";
+}
+
+
+void Reproductor::mezclarRestantes()
+{
+    int total = playlist.tamano();
+
+    if (total <= 1 || actual == nullptr)
+    {
+        return;
+    }
+
+    int indiceActual = getIndexActual();
+
+    int inicio = indiceActual + 1;
+
+    if (inicio >= total)
+    {
+        return;
+    }
+
+    for (int i = total - 1; i > inicio; i--)
+    {
+        int j = inicio + rand() % (i - inicio + 1);
+
+        Cancion temp = playlist.obtener(i);
+        playlist.mod(i, playlist.obtener(j));
+        playlist.mod(j, temp);
+    }
+
+    actual = playlist.getCabeza();
+
+    for (int i = 0; i < indiceActual; i++)
+    {
+        actual = actual->next;
+    }
 }
 
 

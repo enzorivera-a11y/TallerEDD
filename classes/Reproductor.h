@@ -21,6 +21,9 @@ private:
 public:
     Reproductor();
 
+
+    Nodo<Cancion>* getCabezaActual();
+
     ListaEnlazada<Cancion>& getLista();
     ListaEnlazada<Cancion>& getPlaylist();
     void setLista(ListaEnlazada<Cancion> lista);
@@ -44,9 +47,12 @@ public:
     int getRepeatMode();
 
     void SetEstado(int index,bool play,bool mix,int repeat);
+    void generarMixRand();
 
     void mezclarPL();
     void playSong(int index);
+
+    void mezclarRestantes();
 };
 
 
