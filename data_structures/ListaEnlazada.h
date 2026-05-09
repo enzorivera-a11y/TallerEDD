@@ -24,6 +24,18 @@ class ListaEnlazada {
         return inicio;
     }
 
+    void vaciar()
+    {
+        Nodo<T>* temp;
+        while (inicio != nullptr)
+        {
+            temp = inicio;
+            inicio = inicio->next;
+            delete temp;
+        }
+        num = 0;
+    }
+
     void insertarFinal(T dato)
     {
         Nodo<T>* nodoNuevo = new Nodo<T>(dato);
