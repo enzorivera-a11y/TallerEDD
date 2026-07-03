@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cctype>
+#include <limits>
+#include <string>
+
 #include "Menu.h"
 #include "../classes/Reproductor.h"
 #include "../data_structures//ListaEnlazada.h"
@@ -7,20 +10,52 @@
 
 using namespace std;
 
-void menuInicial(Reproductor& reproductor)
+char leerChar()
 {
-    ListaEnlazada<Cancion> res = reproductor.buscarCanciones(texto);
-    for(int i = 0; i < res.tamano(); i++)
-    {
-        Cancion c = res.obtener(i);
+    string input;
+    getline(cin, input);
 
-        cout << i+1 << ". "
-             << c.getNombre()
-             << " - "
-             << c.getArtista()
-             << endl;
+    if(input.empty())
+        return '\0';
+
+    return toupper(input[0]);
+}
+
+string leerLinea()
+{
+    string input;
+    getline(cin, input);
+    return input;
+}
+
+pair<char, int> leerComando()
+{
+    string input;
+    getline(cin, input);
+
+    if(input.empty())
+        return {'\0', -1};
+
+    char op = toupper(input[0]);
+
+    int num = -1;
+
+    if(input.size() > 1)
+    {
+        try {
+            num = stoi(input.substr(1));
+        }
+        catch(...)
+        {
+            num = -1;
+        }
     }
 
+    return {op, num};
+}
+
+void menuInicial(Reproductor& reproductor)
+{
 
     GestorArchivos gestor;
 
@@ -38,11 +73,14 @@ void menuInicial(Reproductor& reproductor)
              << "Repeticion (R)\n"
              << "Menu de playlist (A)\n"
              << "Menu de canciones (L)\n"
+             << "Buscar canciones (F)\n"
+             << "TOP 10 Artistas y Canciones (T)\n"
              << "Salir (X)\n"
         <<"Elija una opcion: ";
 
-        cin >> opcion;
-        opcion = toupper(opcion);
+
+        opcion = leerChar();
+        if (opcion == '\0') continue;
 
         switch (opcion)
         {
@@ -89,6 +127,15 @@ void menuInicial(Reproductor& reproductor)
             cout << "\n";
             break;
 
+        case 'F':
+            menuBusqueda(reproductor);
+            cout << "\n";
+            break;
+
+        case 'T':
+            //pendiente
+            break;
+
         case 'X':
             cout << "Hasta la proxima\n";
             break;
@@ -124,21 +171,26 @@ void menuPlaylist(Reproductor& reproductor) {
         cout << "\n=Opciones=:\n";
         cout << "V: Volver\n";
         cout << "Elija una opcion: ";
-        cin >> opcion;
-        opcion = toupper(opcion);
     }
     cout << "\n=Opciones=\n";
     cout << "S<num>: Saltar a la cancion\n";
     cout << "V: Volver al menu principal\n";
     cout << "Elija una opcion: ";
 
-    cin >> opcion;
-    opcion = toupper(opcion);
+    opcion = leerChar();
 
     if (opcion == 'V') {return;}
     if (opcion == 'S')
     {
-        cin >> pos;
+        int pos;
+        try
+        {
+            pos = stoi(leerLinea());
+        } catch (...)
+        {
+            cout << "Numero invalido\n";
+            return;
+        }
 
         if (pos >= 1 && pos <= playlist.tamano())
         {
@@ -149,90 +201,175 @@ void menuPlaylist(Reproductor& reproductor) {
 
 void menuCanciones(Reproductor& reproductor)
 {
-    cout << "===Bienvenido al Menu de Canciones===\n";
-    ListaEnlazada<Cancion> lista = reproductor.getLista();
-    char opcion;
-    int pos;
-
-    cout << "Cancion actual"<<endl;
-    reproductor.mostrarActual();
-    cout  << "Canciones registradas: \n";
-    if (lista.tamano() != 0)
+    while (true)
     {
+        cout << "===Bienvenido al Menu de Canciones===\n";
+
+        ListaEnlazada<Cancion> lista = reproductor.getLista();
+
+        cout << "Cancion actual\n";
+        reproductor.mostrarActual();
+
+        cout << "Canciones registradas:\n";
+
         for (int i = 0; i < lista.tamano(); i++)
         {
             Cancion song = lista.obtener(i);
-
-            cout << i + 1 << ". " << song.getNombre() << " - " << song.getArtista()<<endl;
+            cout << i + 1 << ". " << song.getNombre()
+                 << " - " << song.getArtista() << endl;
         }
-    }else{
-        cout <<"Canciones registradas: \n";
-        cout << "Vacía \n";
-        cout << "\n=Opciones=:\n";
-        cout << "N: Agregar cancion al registro\n";
+
+        cout << "\n=Opciones=\n";
+        cout << "R<num>: Reproducir\n";
+        cout << "A<num>: Agregar\n";
+        cout << "D<num>: Eliminar\n";
+        cout << "N: Agregar canción\n";
         cout << "V: Volver\n";
         cout << "Elija una opcion: ";
-        cin >> opcion;
-        opcion = toupper(opcion);
 
-        if (opcion == 'V') {return;}
-        if (opcion == 'N')
+        string input = leerLinea();
+
+        if (input.empty()) continue;
+
+        char op = toupper(input[0]);
+
+        if (op == 'V') return;
+
+        if (op == 'N')
         {
-
+            cout << "Agregar canción (pendiente)\n";
+            continue;
         }
 
-    }
-    cout << "\n=Opciones=\n";
-    cout << "R<num>: Reproducir cancion seleccionada\n";
-    cout << "A<num>: Agregar cancion seleccionada al final de la lista\n";
-    cout << "N: Agregar cancion al registro\n";
-    cout << "D<num>: Eliminar cancion seleccionada\n";
-    cout << "V: Volver al menu principal\n";
-    cout << "Elija una opcion: ";
+        if (input.size() < 2)
+        {
+            cout << "Formato inválido\n";
+            continue;
+        }
 
+        int pos;
+        try {
+            pos = stoi(input.substr(1));
+        } catch (...) {
+            cout << "Número inválido\n";
+            continue;
+        }
 
-    cin >> opcion;
-    opcion = toupper(opcion);
+        if (pos < 1 || pos > lista.tamano())
+        {
+            cout << "Posición inválida\n";
+            continue;
+        }
 
-        switch (opcion)
+        int idx = pos - 1;
+
+        switch (op)
         {
         case 'R':
-            cin >> pos;
-            if (pos >= 1 && pos <= lista.tamano())
-            {
-                reproductor.playSong(pos-1);
-            }
-            else
-            {
-                cout << "Posicion invalida\n";
-            }
+            reproductor.playSong(idx);
             break;
+
         case 'A':
-            cin >> pos;
-            if (pos >= 1 && pos <= lista.tamano())
-            {
-                reproductor.agregarSong(pos-1);
-            }
-            else
-            {
-                cout << "Posicion invalida\n";
-            }
+            reproductor.agregarSong(idx);
             break;
-        case 'N':
-            cout << "\n";
-            break;
+
         case 'D':
-            cin >> pos;
-            cout << "\n";
+            cout << "Eliminar (pendiente)\n";
             break;
-        case 'V':
-            cout << "\n";
-            return;
+
         default:
-            cout << "Opcion invalida o no disponible";
+            cout << "Opción inválida\n";
+            break;
         }
+    }
 }
 
+void menuBusqueda(Reproductor& reproductor)
+{
+    bool seguir = true;
+    while(seguir)
+    {
+        cout << "\n===== BUSQUEDA =====\n";
+        cout << "Buscar: ";
 
+        string texto = leerLinea();
+
+        if (texto.empty())
+        {
+            cout << "Búsqueda vacía\n";
+            continue;
+        }
+
+        ListaEnlazada<int> resultados =
+                reproductor.buscarCanciones(texto);
+
+        if(resultados.tamano() == 0)
+        {
+            cout << "\nNo se encontraron canciones.\n";
+        }
+        else
+        {
+            cout << "\nResultados:\n\n";
+
+            for(int i = 0; i < resultados.tamano(); i++)
+            {
+                Cancion c =
+                    reproductor.getLista().obtener(resultados.obtener(i));
+
+                cout
+                << i + 1
+                << ". "
+                << c.getNombre()
+                << " - "
+                << c.getArtista()
+                << endl;
+            }
+        }
+
+        cout << "\n";
+        cout << "R<num> Reproducir\n";
+        cout << "A<num> Agregar\n";
+        cout << "F Buscar nuevamente\n";
+        cout << "V Volver\n";
+        cout << "Elija una opcion: ";
+
+        auto cmd = leerComando();
+
+        char accion = cmd.first;
+        int numero = cmd.second;
+
+        if(accion == 'V')
+            return;
+
+        if(accion == 'F')
+            continue;
+
+        if (numero == -1)
+        {
+            cout << "Comando invalido\n";
+            continue;
+        }
+
+
+        if(numero < 1 || numero > resultados.tamano())
+        {
+            cout << "Numero invalido\n";
+            continue;
+        }
+
+        int indice = resultados.obtener(numero - 1);
+
+        if(accion == 'R')
+        {
+            reproductor.playSong(indice);
+            return;
+        }
+        else if(accion == 'A')
+        {
+            reproductor.agregarSong(indice);
+            return;
+        }
+    }
+}
 
 

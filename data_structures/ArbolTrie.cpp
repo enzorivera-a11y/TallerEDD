@@ -18,30 +18,33 @@ string ArbolTrie::minusculas(string texto)
     return texto;
 }
 
-void ArbolTrie::insertarTexto(string texto, Cancion* cancion)
+void ArbolTrie::insertarTexto(string texto, int indiceCancion)
 {
     texto = minusculas(texto);
 
     NodoTrie* actual = raiz;
 
-    for(int i = 0; i < texto.size(); i++)
+    for(char c: texto)
     {
-        int indice = (int)texto[i];
+        unsigned char caracter = static_cast<unsigned char>(c);
 
-        if(actual->hijos[indice] == nullptr)
+        if(actual->hijos[caracter] == nullptr)
         {
-            actual->hijos[indice] = new NodoTrie();
+            actual->hijos[caracter] = new NodoTrie();
         }
 
-        actual = actual->hijos[indice];
+        actual = actual->hijos[caracter];
+
+        if(!existeIndice(actual->canciones, indiceCancion))
+        {
+            actual->canciones.insertarFinal(indiceCancion);
+        }
     }
 
     actual->finPalabra = true;
-
-    actual->canciones.insertarFinal(cancion);
 }
 
-void ArbolTrie::insertarSufijos(string texto, Cancion* cancion)
+void ArbolTrie::insertarSufijos(string texto, int indice)
 {
     texto = minusculas(texto);
 
@@ -49,24 +52,24 @@ void ArbolTrie::insertarSufijos(string texto, Cancion* cancion)
     {
         string sufijo = texto.substr(i);
 
-        insertarTexto(sufijo, cancion);
+        insertarTexto(sufijo, indice);
     }
 }
 
-void ArbolTrie::insertar(Cancion* cancion)
+void ArbolTrie::insertar(Cancion cancion, int indice)
 {
-    insertarSufijos(cancion->getNombre(), cancion);
+    insertarSufijos(cancion.getNombre(), indice);
 
-    insertarSufijos(cancion->getArtista(), cancion);
+    insertarSufijos(cancion.getArtista(), indice);
 }
 
-bool ArbolTrie::existeCancion(ListaEnlazada<Cancion*>& lista, Cancion* cancion)
+bool ArbolTrie::existeIndice(ListaEnlazada<int>& lista, int indice)
 {
-    Nodo<Cancion*>* actual = lista.getCabeza();
+    Nodo<int>* actual = lista.getCabeza();
 
     while(actual != nullptr)
     {
-        if(actual->dato->id == cancion->id)
+        if(actual->dato == indice)
         {
             return true;
         }
@@ -77,9 +80,9 @@ bool ArbolTrie::existeCancion(ListaEnlazada<Cancion*>& lista, Cancion* cancion)
     return false;
 }
 
-ListaEnlazada<Cancion*> ArbolTrie::buscar(string texto)
+ListaEnlazada<int> ArbolTrie::buscar(string texto)
 {
-    ListaEnlazada<Cancion*> resultado;
+    ListaEnlazada<int> resultado;
 
     texto = minusculas(texto);
 
@@ -87,7 +90,8 @@ ListaEnlazada<Cancion*> ArbolTrie::buscar(string texto)
 
     for(int i = 0; i < texto.size(); i++)
     {
-        int indice = (int)texto[i];
+        unsigned char indice = static_cast<unsigned char>(texto[i]);
+
 
         if(actual->hijos[indice] == nullptr)
         {
@@ -97,11 +101,11 @@ ListaEnlazada<Cancion*> ArbolTrie::buscar(string texto)
         actual = actual->hijos[indice];
     }
 
-    Nodo<Cancion*>* aux = actual->canciones.getCabeza();
+    Nodo<int>* aux = actual->canciones.getCabeza();
 
     while(aux != nullptr)
     {
-        if(!existeCancion(resultado, aux->dato))
+        if(!existeIndice(resultado, aux->dato))
         {
             resultado.insertarFinal(aux->dato);
         }

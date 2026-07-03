@@ -12,20 +12,17 @@ class NodoTrie
 {
 public:
 
-    // Hijos del Trie (ASCII)
-    NodoTrie* hijos[128];
+    NodoTrie* hijos[256];
 
-    // Indica si termina una palabra
     bool finPalabra;
 
-    // Canciones asociadas a esta palabra
-    ListaEnlazada<Cancion> canciones;
+    ListaEnlazada<int> canciones;
 
     NodoTrie()
     {
         finPalabra = false;
 
-        for(int i = 0; i < 128; i++)
+        for(int i = 0; i < 256; i++)
         {
             hijos[i] = nullptr;
         }

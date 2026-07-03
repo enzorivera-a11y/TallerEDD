@@ -1,11 +1,12 @@
 //
 // Created by Enzod on 18-04-2026.
 //
-#include "../data_structures/ArbolTrie.h"
+
 
 #ifndef TALLEREDD_REPRODUCTOR_H
 #define TALLEREDD_REPRODUCTOR_H
 
+#include "../data_structures/ArbolTrie.h"
 #include "../data_structures/ListaEnlazada.h"
 #include "Cancion.h"
 
@@ -57,7 +58,7 @@ public:
 
     void mezclarRestantes();
 
-    ListaEnlazada<Cancion> buscarCanciones(string texto);
+    ListaEnlazada<int> buscarCanciones(string texto);
     void construirIndiceBusqueda();
 };
 

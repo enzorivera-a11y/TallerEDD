@@ -18,19 +18,19 @@ private:
 
     string minusculas(string texto);
 
-    void insertarTexto(string texto, Cancion* cancion);
+    void insertarTexto(string texto, int indice);
 
-    void insertarSufijos(string texto, Cancion* cancion);
+    void insertarSufijos(string texto, int indice);
 
-    bool existeCancion(ListaEnlazada<Cancion*>& lista, Cancion* cancion);
+    bool existeIndice(ListaEnlazada<int>& lista, int indice);
 
 public:
 
     ArbolTrie();
 
-    void insertar(Cancion* cancion);
+    void insertar(Cancion cancion, int indice);
 
-    ListaEnlazada<Cancion*> buscar(string texto);
+    ListaEnlazada<int> buscar(string texto);
 };
 
 #endif

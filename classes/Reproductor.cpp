@@ -331,17 +331,16 @@ void Reproductor::mezclarRestantes()
     }
 }
 
-    void Reproductor::construirIndiceBusqueda()
+void Reproductor::construirIndiceBusqueda()
+{
+    for (int i = 0; i < lista.tamano(); i++)
     {
-        for (int i = 0; i < lista.tamano(); i++)
-        {
-            Cancion c = lista.obtener(i);
-            A_canciones.insertar(c);
-        }
+        A_canciones.insertar(lista.obtener(i), i);
     }
+}
 
 
-ListaEnlazada<Cancion> Reproductor::buscarCanciones(string texto)
+ListaEnlazada<int> Reproductor::buscarCanciones(string texto)
 {
     return A_canciones.buscar(texto);
 }
