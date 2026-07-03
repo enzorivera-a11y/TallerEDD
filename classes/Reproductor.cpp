@@ -18,6 +18,8 @@ void Reproductor::setLista(ListaEnlazada<Cancion> lista) {
         playlist.insertarFinal(lista.obtener(i));
     }
     actual = this->playlist.getCabeza();
+
+    construirIndiceBusqueda();
 }
 
 Reproductor::Reproductor() {
@@ -328,6 +330,22 @@ void Reproductor::mezclarRestantes()
         actual = actual->next;
     }
 }
+
+    void Reproductor::construirIndiceBusqueda()
+    {
+        for (int i = 0; i < lista.tamano(); i++)
+        {
+            Cancion c = lista.obtener(i);
+            A_canciones.insertar(c);
+        }
+    }
+
+
+ListaEnlazada<Cancion> Reproductor::buscarCanciones(string texto)
+{
+    return A_canciones.buscar(texto);
+}
+
 
 
 

@@ -9,4 +9,7 @@ add_executable(TallerEDD
         data_structures/ListaEnlazada.h
         classes/GestorArchivos.h
         core/menu.h
+        data_structures/ArbolTrie.h
+        data_structures/ArbolTrie.cpp
+        data_structures/NodoTrie.h
 )

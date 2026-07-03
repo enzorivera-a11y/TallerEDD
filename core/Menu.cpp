@@ -9,6 +9,19 @@ using namespace std;
 
 void menuInicial(Reproductor& reproductor)
 {
+    ListaEnlazada<Cancion> res = reproductor.buscarCanciones(texto);
+    for(int i = 0; i < res.tamano(); i++)
+    {
+        Cancion c = res.obtener(i);
+
+        cout << i+1 << ". "
+             << c.getNombre()
+             << " - "
+             << c.getArtista()
+             << endl;
+    }
+
+
     GestorArchivos gestor;
 
 
@@ -219,5 +232,7 @@ void menuCanciones(Reproductor& reproductor)
             cout << "Opcion invalida o no disponible";
         }
 }
+
+
 
 
