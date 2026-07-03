@@ -56,11 +56,11 @@ class ListaEnlazada {
         }
         num++;
     }
-    int tamano() const
+    int tamano()
     {
         return num;
     }
-    T obtener(int pos) const
+    T obtener(int pos)
     {   Nodo<T> *current = inicio;
 
         for (int i = 0; i < pos; i++)

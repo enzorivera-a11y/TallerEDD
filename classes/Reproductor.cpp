@@ -10,16 +10,14 @@
 
 using namespace std;
 
-void Reproductor::setLista(const ListaEnlazada<Cancion>& lista) {
+void Reproductor::setLista(ListaEnlazada<Cancion> lista) {
     this->lista = lista;
-
-    playlist.vaciar();
 
     for (int i = 0; i < lista.tamano(); i++)
     {
         playlist.insertarFinal(lista.obtener(i));
     }
-    actual = playlist.getCabeza();
+    actual = this->playlist.getCabeza();
 }
 
 Reproductor::Reproductor() {
@@ -329,11 +327,6 @@ void Reproductor::mezclarRestantes()
     {
         actual = actual->next;
     }
-}
-
-void Reproductor::agregarSongRegistro(const Cancion& song)
-{
-    lista.insertarFinal(song);
 }
 
 

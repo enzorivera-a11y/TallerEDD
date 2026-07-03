@@ -75,39 +75,20 @@ void GestorArchivos::cargarEstado(Reproductor& rep)
 
     while (getline(file, line))
     {
-        if (line.find("Current=") == 0)
-            current = stoi(line.substr(string("Current=").length()));
+        if (line.find("current_song=") == 0)
+            current = stoi(line.substr(13));
 
-        else if (line.find("Playing=") == 0)
-            playing = stoi(line.substr(string("Playing=").length()));
+        else if (line.find("is_playing=") == 0)
+            playing = stoi(line.substr(11));
 
-        else if (line.find("Mix=") == 0)
-            mixRand = stoi(line.substr(string("Mix=").length()));
+        else if (line.find("shuffle=") == 0)
+            mixRand = stoi(line.substr(8));
 
-        else if (line.find("Repeat=") == 0)
-            repeat = stoi(line.substr(string("Repeat=").length()));
+        else if (line.find("repeat_mode=") == 0)
+            repeat = stoi(line.substr(12));
     }
-}
-
-void GestorArchivos::agregarSongArchivo(const Cancion& song)
-{
-    ofstream file("../data/music_source.txt", ios::app);
-
-    if (!file.is_open())
-    {
-        cout<<"Error al abrir el archivo"<<endl;
-        return;
-    }
-
-    file
-        <<song.getId()<<","
-        <<song.getNombre()<<","
-        <<song.getArtista()<<","
-        <<song.getAlbum()<<","
-        <<song.getAgno() << ","
-        <<song.getDuracion()<<","
-        <<song.getUbiArchivo()
-        <<endl;
 
     file.close();
+
+    rep.SetEstado(current, playing, mixRand, repeat);
 }

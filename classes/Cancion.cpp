@@ -23,31 +23,10 @@ Cancion::Cancion(int id, string nombre, string artista, string album, int agno, 
 }
 #include "Cancion.h"
 
-string Cancion::getNombre() const {
+std::string Cancion::getNombre() {
     return nombre;
 }
 
-string Cancion::getArtista() const{
+std::string Cancion::getArtista() {
     return artista;
 }
-
-int Cancion::getId() const{
-    return id;
-}
-
-string Cancion::getAlbum() const {
-    return album;
-}
-
-int Cancion::getAgno() const{
-    return agno;
-}
-
-int Cancion::getDuracion() const{
-    return duracion;
-}
-
-string Cancion::getUbiArchivo() const{
-    return ubi_arch;
-}
-

@@ -12,7 +12,6 @@ public:
     ListaEnlazada<Cancion> cargarCanciones();
     void guardarEstado(Reproductor& rep);
     void cargarEstado(Reproductor& rep);
-    void agregarSongArchivo(const Cancion& song);
 
 };
 

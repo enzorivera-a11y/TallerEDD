@@ -12,12 +12,8 @@ int main() {
 
     Reproductor reproductor;
     reproductor.setLista(canciones);
-    gestor.cargarEstado(reproductor);
-
 
     menuInicial(reproductor);
-
-    gestor.guardarEstado(reproductor);
 
     return 0;
 }

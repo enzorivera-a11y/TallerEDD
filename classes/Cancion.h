@@ -22,13 +22,8 @@ public:
 
     Cancion(int id, string nombre, string artista, string album, int agno, int duracion, string ubi_arch);
 
-    string getNombre() const;
-    string getArtista() const;
-    int getId() const;
-    string getAlbum() const;
-    int getDuracion() const;
-    int getAgno() const;
-    string getUbiArchivo() const;
+    string getNombre();
+    string getArtista();
 };
 
 
