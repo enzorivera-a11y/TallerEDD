@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1783114949 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.cpp
+	"Cancion.h"
+	"Cancion.h"
+
+1783115116 c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.h
+	<string>
+
+1783101777 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.cpp
+	"Reproductor.h"
+	"Cancion.h"
+	<iostream>
+	<cstdlib>
+	<ctime>
+
+1783115229 c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.h
+	"../data_structures/ListaEnlazada.h"
+	"Cancion.h"
+
+1783115415 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\listaenlazada.h
+	"Nodo.h"
+
+1782879132 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\nodo.h
+
+1783115582 source:c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.cpp
+	<iostream>
+	<cctype>
+	"Menu.h"
+	"../classes/Reproductor.h"
+	"../data_structures//ListaEnlazada.h"
+	"../classes/GestorArchivos.h"
+
+1783100111 c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.h
+	"../classes/Reproductor.h"
+	"../classes/Reproductor.h"
+
+1783115415 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\\listaenlazada.h
+	"Nodo.h"
+
+1782879132 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\\nodo.h
+
+1783115195 c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.h
+	"Cancion.h"
+	"../data_Structures/ListaEnlazada.h"
+	"Reproductor.h"
+
+1783101744 source:c:\users\icetu\onedrive\documentos\github\talleredd\main.cpp
+	<iostream>
+	"classes/GestorArchivos.h"
+	"classes/Reproductor.h"
+	"core/Menu.h"
+
+1783115865 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.cpp
+	"GestorArchivos.h"
+	<fstream>
+	<iostream>
+	<sstream>
+
