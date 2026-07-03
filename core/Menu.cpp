@@ -25,6 +25,7 @@ void menuInicial(Reproductor& reproductor)
              << "Repeticion (R)\n"
              << "Menu de playlist (A)\n"
              << "Menu de canciones (L)\n"
+            <<"Buscar canciones y/o artistas(F)\n"
              << "Salir (X)\n"
         <<"Elija una opcion: ";
 
