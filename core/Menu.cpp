@@ -28,7 +28,12 @@ void menuInicial(Reproductor& reproductor)
              << "Salir (X)\n"
         <<"Elija una opcion: ";
 
-        cin >> opcion;
+        if (!(cin >> opcion))
+        {
+            cin.clear();
+            cout << "Entrada inválida. \n";
+            return;
+        }
         opcion = toupper(opcion);
 
         switch (opcion)
@@ -89,7 +94,7 @@ void menuInicial(Reproductor& reproductor)
 
 void menuPlaylist(Reproductor& reproductor) {
     cout << "===Bienvenido al Menu Playlist===\n";
-    ListaEnlazada<Cancion> playlist = reproductor.getPlaylist();
+    const ListaEnlazada<Cancion>& playlist = reproductor.getPlaylist();
     char opcion;
     int pos;
 
@@ -111,7 +116,12 @@ void menuPlaylist(Reproductor& reproductor) {
         cout << "\n=Opciones=:\n";
         cout << "V: Volver\n";
         cout << "Elija una opcion: ";
-        cin >> opcion;
+        if (!(cin >> opcion))
+        {
+            cin.clear();
+            cout << "Entrada inválida. \n";
+            return;
+        }
         opcion = toupper(opcion);
     }
     cout << "\n=Opciones=\n";
@@ -119,17 +129,28 @@ void menuPlaylist(Reproductor& reproductor) {
     cout << "V: Volver al menu principal\n";
     cout << "Elija una opcion: ";
 
-    cin >> opcion;
+    if (!(cin >> opcion))
+    {
+        cin.clear();
+        cout << "Entrada inválida. \n";
+        return;
+    }
     opcion = toupper(opcion);
 
     if (opcion == 'V') {return;}
     if (opcion == 'S')
     {
-        cin >> pos;
+        if (!(cin >> pos))
+        {
+            cin.clear();
+            cout << "Entrada inválida. \n";
+            return;
+        }
 
         if (pos >= 1 && pos <= playlist.tamano())
         {
             reproductor.moverseHaciaCancion(pos-1);
+            reproductor.mostrarActual();
         }else{ cout << "Posicion inválida\n";}
     }else{cout << "Opción inválida \n";}
 }
@@ -137,7 +158,7 @@ void menuPlaylist(Reproductor& reproductor) {
 void menuCanciones(Reproductor& reproductor)
 {
     cout << "===Bienvenido al Menu de Canciones===\n";
-    ListaEnlazada<Cancion> lista = reproductor.getLista();
+    ListaEnlazada<Cancion>& lista = reproductor.getLista();
     char opcion;
     int pos;
 
@@ -159,14 +180,17 @@ void menuCanciones(Reproductor& reproductor)
         cout << "N: Agregar cancion al registro\n";
         cout << "V: Volver\n";
         cout << "Elija una opcion: ";
-        cin >> opcion;
+        if (!(cin >> opcion))
+    {
+        cin.clear();
+        cout << "Entrada inválida. \n";
+        return;
+    }
         opcion = toupper(opcion);
 
         if (opcion == 'V') {return;}
-        if (opcion == 'N')
-        {
+        if (opcion == 'N') {}
 
-        }
 
     }
     cout << "\n=Opciones=\n";
@@ -178,16 +202,27 @@ void menuCanciones(Reproductor& reproductor)
     cout << "Elija una opcion: ";
 
 
-    cin >> opcion;
+    if (!(cin >> opcion))
+    {
+        cin.clear();
+        cout << "Entrada inválida. \n";
+        return;
+    }
     opcion = toupper(opcion);
 
         switch (opcion)
         {
         case 'R':
-            cin >> pos;
+            if (!(cin >> pos))
+            {
+                cin.clear();
+                cout << "Entrada inválida. \n";
+                return;
+            }
             if (pos >= 1 && pos <= lista.tamano())
             {
                 reproductor.playSong(pos-1);
+                reproductor.mostrarActual();
             }
             else
             {
@@ -195,7 +230,12 @@ void menuCanciones(Reproductor& reproductor)
             }
             break;
         case 'A':
-            cin >> pos;
+            if (!(cin >> pos))
+            {
+                cin.clear();
+                cout << "Entrada inválida. \n";
+                return;
+            }
             if (pos >= 1 && pos <= lista.tamano())
             {
                 reproductor.agregarSong(pos-1);
@@ -206,10 +246,77 @@ void menuCanciones(Reproductor& reproductor)
             }
             break;
         case 'N':
-            cout << "\n";
-            break;
+            {
+                GestorArchivos gestor;
+                string nombre;
+                string artista;
+                string album;
+                string ubi_arch;
+
+                int agno;
+                int duracion;
+
+                cout << "Nombre de la cancion: ";
+                getline(cin >> ws, nombre);
+
+                cout << "Artista de la cancion: ";
+                getline(cin, artista);
+
+                cout << "Album de la cancion: ";
+                getline(cin, album);
+
+                cout << "Año de lanzamiento: ";
+                if (!(cin >> agno))
+                {
+                    cin.clear();
+                    cout << "Entrada inválida.\n";
+                    return;
+                }
+
+                cout << "Duración (segundos): ";
+                if (!(cin >> duracion))
+                {
+                    cin.clear();
+                    cout << "Entrada inválida.\n";
+                    return;
+                }
+
+                cout << "Ruta del archivo: ";
+                getline(cin >> ws, ubi_arch);
+
+                int nuevoId;
+
+                if (lista.tamano() == 0)
+                {
+                    nuevoId = 1;
+                }else
+                {
+                    nuevoId = lista.obtener(lista.tamano() -1).getId() +1;
+                }
+
+                Cancion nueva(
+                    nuevoId,
+                    nombre,
+                    artista,
+                    album,
+                    agno,
+                    duracion,
+                    ubi_arch);
+                reproductor.agregarSongRegistro(nueva);
+                gestor.agregarSongArchivo(nueva);
+                cout << "Canción agregada correctamente.\n";
+                gestor.guardarEstado(reproductor);
+
+                cout << "\n";
+                break;
+            }
         case 'D':
-            cin >> pos;
+            if (!(cin >> pos))
+            {
+                cin.clear();
+                cout << "Entrada inválida. \n";
+                return;
+            }
             cout << "\n";
             break;
         case 'V':

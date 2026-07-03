@@ -26,7 +26,7 @@ public:
 
     ListaEnlazada<Cancion>& getLista();
     ListaEnlazada<Cancion>& getPlaylist();
-    void setLista(ListaEnlazada<Cancion> lista);
+    void setLista(const ListaEnlazada<Cancion>& lista);
     void moverseHaciaCancion(int pos);
 
     void playPause();
@@ -53,6 +53,8 @@ public:
     void playSong(int index);
 
     void mezclarRestantes();
+
+    void agregarSongRegistro(const Cancion& song);
 };
 
 
