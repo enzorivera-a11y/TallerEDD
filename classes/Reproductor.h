@@ -53,6 +53,8 @@ public:
     void playSong(int index);
 
     void mezclarRestantes();
+    int obtenerReproducciones(int idCancion);
+
 };
 
 
