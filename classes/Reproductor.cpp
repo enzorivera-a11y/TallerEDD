@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
+#include <fstream>
 using namespace std;
 
 void Reproductor::setLista(ListaEnlazada<Cancion> lista) {
@@ -328,6 +328,25 @@ void Reproductor::mezclarRestantes()
         actual = actual->next;
     }
 }
-
+int Reproductor::obtenerReproducciones(int idCancion) {
+    ifstream arch("ranking.txt");
+    if (!arch.is_open()) {
+        return 0;
+    }
+    string linea;
+    while (getline(arch,linea)) {
+        stringstream ss(linea);
+        int idactual;
+        int cantidadReprod;
+        ss>>idactual>>cantidadReprod;
+        
+        if (idactual == idCancion) {
+            archivo.close();
+            return cantidadRep;
+        }
+    }
+    arch.close();
+    return 0;
+}
 
 
