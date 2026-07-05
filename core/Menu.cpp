@@ -139,6 +139,10 @@ void menuInicial(Reproductor& reproductor)
         case 'X':
             cout << "Hasta la proxima\n";
             break;
+          case 'T':
+            menuRanking(reproductor);
+            cout << "\n";
+            break;
 
         default:
             cout << "Opción no válida\n";
@@ -372,4 +376,105 @@ void menuBusqueda(Reproductor& reproductor)
     }
 }
 
-
+void menuRanking(Reproductor& reproductor) {
+    char opcion;
+    ListaEnlazada<Cancion> listaGeneral = reproductor.getLista();
+    int totalCanciones = listaGeneral.tamano();
+    do {
+        cout << "Ranking TOP" << endl;
+        cout << "C - Top 10 canciones mas escuchadas" << endl;
+        cout << "A - Top 10 artistas mas escuchados" << endl;
+        cout << "V - Volver al menu principal" << endl;
+        cout << "Ingrese Opcion: ";
+        cin >> opcion;
+        opcion = toupper(opcion);
+        if (opcion == 'C') {//-----------------------
+            if (totalCanciones == 0) {
+                cout << "No hay canciones en el sistema" << endl;
+                continue;
+            }
+            ArbolHeap heap(totalCanciones);
+            for (int i = 0; i < totalCanciones; i++) {
+                Cancion cancion = listaGeneral.obtener(i);
+                
+                CancionRanking ranking;
+                ranking.id = cancion.getId();
+                ranking.nombre = cancion.getNombre();
+                ranking.artista = cancion.getArtista();
+                ranking.reproducciones = reproductor.obtenerReproducciones(ranking.id);
+                
+                heap.insertar(ranking);
+            }
+            cout << "TOP 10 CANCIONES MAS ESCUCHADAS: " << endl;
+            CancionRanking top[10];
+            int cantidadMostrada;
+            
+            if (heap.obtenerTamano() < 10) {
+                cantidadMostrada = heap.obtenerTamano();
+            } else {
+                cantidadMostrada = 10;
+            }
+            for (int i = 0; i < cantidadMostrada; i++) {
+                top[i] = heap.extraerMaximo();
+                cout << (i + 1) << ". [" << top[i].reproducciones << "] " << top[i].nombre << " - " << top[i].artista << endl;
+            }
+            cout << " " << endl;
+            char subOpcion;
+            cout << "Opciones:" << endl;
+            cout << "R<num> - Reproducir cancion seleccionada del Top" << endl;
+            cout << "A<num> - Agregar cancion seleccionada al final de la lista de reproduccion" << endl;
+            cout << "V - Volver al submenu de Rankings" << endl;
+            cout << "Seleccione una accion (Ej: R 1 o V): ";
+            cin >> subOpcion;
+            subOpcion = toupper(subOpcion);
+            if (subOpcion == 'R') { //------
+                int numeroTOP;
+                cin >> numeroTOP;
+                if (numeroTOP >= 1 && numeroTOP <= cantidadMostrada) {
+                    string buscarID = top[numeroTOP - 1].id;
+                    
+                    int indiceReal = -1;
+                    for (int i = 0; i < totalCanciones; i++) {
+                        if (listaGeneral.obtener(i).getId() == buscarID) {
+                            indiceReal = i;
+                            break;
+                        }
+                    }
+                    if (indiceReal != -1) {
+                        reproductor.playSong(indiceReal);
+                        cout << "Reproduciendo cancion" << endl;
+                        reproductor.mostrarActual();
+                    }
+                } else {
+                    cout << "Numero fuera de rango" << endl;
+                }
+            }
+            else if (subOpcion == 'A') { // -----
+                int numeroTOP;
+                cin >> numeroTOP;
+                if (numeroTOP >= 1 && numeroTOP <= cantidadMostrada) {
+                    string buscarID = top[numeroTOP - 1].id;
+                    int indiceReal = -1;
+                    for (int i = 0; i < totalCanciones; i++) {
+                        if (listaGeneral.obtener(i).getId() == buscarID) {
+                            indiceReal = i;
+                            break;
+                        }
+                    }
+                    if (indiceReal != -1) {
+                        reproductor.agregarSong(indiceReal);
+                        cout << "Cancion añadida" << endl;
+                    }
+                } else {
+                    cout << "Numero fuera de rango" << endl;
+                }
+            }
+        }
+        else if (opcion == 'A') {
+            cout << "LOOOL" << endl;
+        }
+        else if (opcion != 'V') {
+            cout << "Opcion no valida" << endl;
+        }
+    } while (opcion != 'V');
+}
