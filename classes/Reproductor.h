@@ -61,7 +61,7 @@ public:
     ListaEnlazada<int> buscarCanciones(string texto);
     void construirIndiceBusqueda();
     int obtenerReproducciones(int idCancion);
-
+    void registroReproduccion(int id);
 };
 
 
