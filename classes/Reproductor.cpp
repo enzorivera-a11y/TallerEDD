@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 void Reproductor::setLista(ListaEnlazada<Cancion> lista) {
@@ -359,8 +360,8 @@ int Reproductor::obtenerReproducciones(int idCancion) {
         ss>>idactual>>cantidadReprod;
         
         if (idactual == idCancion) {
-            archivo.close();
-            return cantidadRep;
+            arch.close();
+            return cantidadReprod;
         }
     }
     arch.close();
