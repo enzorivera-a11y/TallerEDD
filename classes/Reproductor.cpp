@@ -55,8 +55,13 @@ void Reproductor:: Next() {
             }
         }else {
             cout << "Fin de la lista" << endl;
+            return;
         }
     }
+    if(actual != nullptr && Playing){
+        registroReproduccion(actual->dato.id);
+    }
+    
 }
 
 void Reproductor::Back() {
@@ -102,8 +107,6 @@ void Reproductor::ChangeRepeatMode() {
         {
             cout << "Repeat Mode: ALL"<<endl;
         }
-
-
 }
 
 void Reproductor::agregarSong(int index)
@@ -239,6 +242,9 @@ void Reproductor::moverseHaciaCancion(int pos)
         }
 
         Playing = true;
+         if(actual != nullptr){
+            registroReproduccion(actual->dato.id);
+        }
     }
 }
 
@@ -292,6 +298,9 @@ void Reproductor::playSong(int index)
     }
     actual = playlist.getCabeza();
     Playing = true;
+      if(actual !=nullptr){
+        registroReproduccion(actual->dato.id);
+    }
 
     cout << "Cancion elegida ya en reproduccion\n";
 }
@@ -368,4 +377,43 @@ int Reproductor::obtenerReproducciones(int idCancion) {
     return 0;
 }
 
+void Reproductor::registroReproduccion(int idCancion){
+    if(idCancion < 0)return;
+    const int maxCancion = 500;
+    int totalRegistrados = 0;
+    bool encontrado = false;
+    int contar[maxCancion];
+    int tot[maxCancion];
+    ifstream arch("../ranking.txt");
+    if (arch.is_open()) { // ---------
+        string linea;
+        while (getline(arch, linea) && totalRegistrados < maxCancion) {
+            stringstream ss(linea);
+            int idActual, cantidadReprod;
+            if (ss >> idActual >> cantidadReprod) {
+                tot[totalRegistrados] = idActual;
+                if (idActual == idCancion) {
+                    contar[totalRegistrados] = cantidadReprod + 1;
+                    encontrado = true;
+                } else {
+                    contar[totalRegistrados] = cantidadReprod;
+                }
+                totalRegistrados++;
+            }
+        }
+        arch.close();
+    }
+    if (!encontrado && totalRegistrados < maxCancion) {
+        tot[totalRegistrados] = idCancion;
+        contar[totalRegistrados] = 1;
+        totalRegistrados++;
+    }
+    ofstream archEscrito("../ranking.txt");
+    if (archEscrito.is_open()) {
+        for (int i = 0; i < totalRegistrados; i++) {
+            archEscrito << tot[i] << " " << contar[i] << "\n";
+        }
+        archEscrito.close();
+    }
+}
 
