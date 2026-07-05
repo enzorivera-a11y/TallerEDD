@@ -1,58 +1,80 @@
 # depslib dependency file v1.0
-1783114949 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.cpp
+1783291048 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.cpp
 	"Cancion.h"
 	"Cancion.h"
 
-1783115116 c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.h
+1783290994 c:\users\icetu\onedrive\documentos\github\talleredd\classes\cancion.h
 	<string>
 
-1783101777 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.cpp
+1783290894 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.cpp
 	"Reproductor.h"
 	"Cancion.h"
 	<iostream>
 	<cstdlib>
 	<ctime>
+	<fstream>
+	<sstream>
 
-1783115229 c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.h
+1783290851 c:\users\icetu\onedrive\documentos\github\talleredd\classes\reproductor.h
+	"../data_structures/ArbolTrie.h"
 	"../data_structures/ListaEnlazada.h"
 	"Cancion.h"
 
-1783115415 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\listaenlazada.h
+1783291769 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\listaenlazada.h
 	"Nodo.h"
 
 1782879132 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\nodo.h
 
-1783115582 source:c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.cpp
+1783291236 source:c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.cpp
 	<iostream>
 	<cctype>
+	<limits>
+	<string>
+	<fstream>
+	<sstream>
 	"Menu.h"
 	"../classes/Reproductor.h"
 	"../data_structures//ListaEnlazada.h"
 	"../classes/GestorArchivos.h"
+	"../classes/ArbolHeap.h"
 
-1783100111 c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.h
-	"../classes/Reproductor.h"
-	"../classes/Reproductor.h"
+1783291252 c:\users\icetu\onedrive\documentos\github\talleredd\core\menu.h
 
-1783115415 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\\listaenlazada.h
+1783291769 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\\listaenlazada.h
 	"Nodo.h"
 
 1782879132 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\\nodo.h
 
-1783115195 c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.h
+1783290940 c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.h
 	"Cancion.h"
 	"../data_Structures/ListaEnlazada.h"
 	"Reproductor.h"
 
-1783101744 source:c:\users\icetu\onedrive\documentos\github\talleredd\main.cpp
+1783291333 source:c:\users\icetu\onedrive\documentos\github\talleredd\main.cpp
 	<iostream>
 	"classes/GestorArchivos.h"
 	"classes/Reproductor.h"
 	"core/Menu.h"
 
-1783115865 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.cpp
+1783290961 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\gestorarchivos.cpp
 	"GestorArchivos.h"
 	<fstream>
 	<iostream>
 	<sstream>
+
+1783291113 source:c:\users\icetu\onedrive\documentos\github\talleredd\classes\arbolheap.cpp
+	"ArbolHeap.h"
+
+1783291108 c:\users\icetu\onedrive\documentos\github\talleredd\classes\arbolheap.h
+	<string>
+
+1783291561 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\arboltrie.h
+	<string>
+	"../classes/Cancion.h"
+	"NodoTrie.h"
+	"ListaEnlazada.h"
+
+1783291566 c:\users\icetu\onedrive\documentos\github\talleredd\data_structures\nodotrie.h
+	"../classes/Cancion.h"
+	"ListaEnlazada.h"
 

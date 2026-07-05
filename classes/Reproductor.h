@@ -2,14 +2,17 @@
 // Created by Enzod on 18-04-2026.
 //
 
+
 #ifndef TALLEREDD_REPRODUCTOR_H
 #define TALLEREDD_REPRODUCTOR_H
 
+#include "../data_structures/ArbolTrie.h"
 #include "../data_structures/ListaEnlazada.h"
 #include "Cancion.h"
 
 class Reproductor {
 private:
+    ArbolTrie A_canciones;
     ListaEnlazada<Cancion> lista;
     ListaEnlazada<Cancion> playlist;
     Nodo<Cancion>* actual;
@@ -28,6 +31,7 @@ public:
     ListaEnlazada<Cancion>& getPlaylist();
     void setLista(ListaEnlazada<Cancion> lista);
     void moverseHaciaCancion(int pos);
+
 
     void playPause();
     void Next();
@@ -53,6 +57,11 @@ public:
     void playSong(int index);
 
     void mezclarRestantes();
+
+    ListaEnlazada<int> buscarCanciones(string texto);
+    void construirIndiceBusqueda();
+    int obtenerReproducciones(int idCancion);
+    void registroReproduccion(int id);
 };
 
 

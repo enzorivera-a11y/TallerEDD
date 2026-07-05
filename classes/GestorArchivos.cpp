@@ -41,7 +41,7 @@ ListaEnlazada<Cancion> GestorArchivos::cargarCanciones()
 
 void GestorArchivos::guardarEstado(Reproductor& rep)
 {
-    ofstream file("../data/status.cfg");
+    ofstream file("status.cfg");
 
     if (!file.is_open())
     {
@@ -59,7 +59,7 @@ void GestorArchivos::guardarEstado(Reproductor& rep)
 
 void GestorArchivos::cargarEstado(Reproductor& rep)
 {
-    ifstream file("../data/status.cfg");
+    ifstream file("status.cfg");
 
     if (!file.is_open())
     {

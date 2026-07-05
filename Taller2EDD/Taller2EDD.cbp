@@ -32,7 +32,23 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="../classes/ArbolHeap.cpp" />
+		<Unit filename="../classes/ArbolHeap.h" />
+		<Unit filename="../classes/Artista.h" />
+		<Unit filename="../classes/Cancion.cpp" />
+		<Unit filename="../classes/Cancion.h" />
+		<Unit filename="../classes/GestorArchivos.cpp" />
+		<Unit filename="../classes/GestorArchivos.h" />
+		<Unit filename="../classes/Reproductor.cpp" />
+		<Unit filename="../classes/Reproductor.h" />
+		<Unit filename="../core/Menu.cpp" />
+		<Unit filename="../core/Menu.h" />
+		<Unit filename="../data/music_source.txt" />
+		<Unit filename="../data/status.cfg" />
+		<Unit filename="../data_structures/ListaEnlazada.h" />
+		<Unit filename="../data_structures/Nodo.h" />
+		<Unit filename="../main.cpp" />
+		<Unit filename="../ranking.txt" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
