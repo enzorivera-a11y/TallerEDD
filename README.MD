@@ -122,7 +122,12 @@ Se conserva:
 Al reiniciar el programa, la reproducción continúa desde el estado anterior.
 
 ---
-# Dato respecto a la función de TOP 10
+#Consideración general
+
+Para iniciar todo correctamente, se prefiere presionar primero la W y luego lo demás, así se guardarán los datos del TOP. Si la reproducción está en pausa, los datos no se almacenarán correctamente
+
+---
+# Consideración respecto a la función de TOP 10
 
 A la hora de ejecutar el programa, y la función T, el archivo "ranking.txt" iniciará vacío, el cuál se usará para almacenar los tops del ranking (Canciones y Artistas), y mantendrá los datos de forma persistente
 
