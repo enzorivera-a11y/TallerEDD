@@ -120,7 +120,65 @@ void menuRanking(Reproductor& reproductor) {
             }
         }
         else if (opcion == 'A') {
-            cout << "LOOOL" << endl;
+            if(totalCanciones ==0){
+                cout<< "No hay artistas en el sistema"<< endl;
+                continue;
+            }
+
+            ListaEnlazada<string> artistasProcesados;
+
+            ArbolHeap heapArtistas(totalCanciones);
+
+            for(int i = 0;i< totalCanciones;i++){
+                string nombreArtista = listaGeneral.obtener(i).getArtista();
+
+                bool Procesado = false;
+                Nodo<string>* actualArt = artistasProcesados.getCabeza();
+                while(actualArt != nullptr){
+                    if(actualArt->dato == nombreArtista){
+                        Procesado = true;
+                        break;
+                    }
+                    actualArt = actualArt->next;
+                }
+                if(Procesado)continue;
+
+                int reprosTotalesArtista = 0;
+                for(int j=0; j < totalCanciones;j++){
+                    Cancion cancAux = listaGeneral.obtener(j);
+                    if(cancAux.getArtista() == nombreArtista){
+                        reprosTotalesArtista += reproductor.obtenerReproducciones(cancAux.id);
+                    }
+                }
+                artistasProcesados.insertarFinal(nombreArtista);
+
+                CancionRanking rankingArtista;
+                rankingArtista.id = -1;
+                rankingArtista.nombre = "";
+                rankingArtista.artista = nombreArtista;
+                rankingArtista.reproducciones = reprosTotalesArtista;
+
+                heapArtistas.insertar(rankingArtista);
+            }
+            cout<< "TOP 10 ARTISTAS MAS ESCUCHADOS: " << endl;
+            cout<< "" << endl;
+
+            int cantidadArtistasMostrados = 10;
+            if(heapArtistas.obtenertotal() <10){
+                cantidadArtistasMostrados = heapArtistas.obtenertotal();
+            }
+
+            for(int i=0; i<cantidadArtistasMostrados;i++){
+                CancionRanking topArtista = heapArtistas.obtentermax();
+                cout << (i + 1) << ". [" << topArtista.reproducciones << "] " << topArtista.artista << endl;
+            }
+            cout<< " " << endl;
+
+            // Pausa pequeña antes de volver al submenú de rankings (podemos borrarlo si prefieren mantenerlo como el resto)
+            cout << "Presione ENTER para continuar...";
+            cin.ignore();
+            string pausa;
+            getline(cin, pausa);
         }
         else if (opcion != 'V') {
             cout << "Opcion no valida" << endl;
