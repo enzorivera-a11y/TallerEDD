@@ -47,7 +47,7 @@ void menuRanking(Reproductor& reproductor) {
             ArbolHeap heap(totalCanciones);
             for (int i = 0; i < totalCanciones; i++) {
                 Cancion cancion = listaGeneral.obtener(i);
-using namespace std;
+
                 CancionRanking ranking;
                 ranking.id = cancion.id;
                 ranking.nombre = cancion.getNombre();
