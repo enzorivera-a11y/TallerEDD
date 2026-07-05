@@ -24,6 +24,7 @@ public:
 
     string getNombre();
     string getArtista();
+      int getID();
 };
 
 
