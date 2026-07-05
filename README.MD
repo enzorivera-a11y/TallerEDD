@@ -1,108 +1,200 @@
-PlayerSona: Reproductor de Música vía consola
+# PlayerSona - Reproductor Musical en C++
 
-## Integrantes
+> Proyecto desarrollado para el Taller de Estructuras de Datos.
 
-Enzo Rivera Flores - Iván Cosse Viloria
-
-## Descripción
-
-PlayerSona es un reproductor musical desarrollado en C++ para consola.
-El proyecto implementa listas enlazadas manualmente sin utilizar STL.
-Permite gestionar playlists, reproducir canciones, usar modo aleatorio,
-modo repetición y persistencia mediante archivos.
-También incluye manejo de canciones registradas y almacenamiento de estado.
+PlayerSona es un reproductor musical ejecutado completamente desde consola, desarrollado en **C++**. El proyecto implementa manualmente diversas estructuras de datos, permitiendo administrar canciones, playlists, búsquedas rápidas y estadísticas de reproducción.
 
 ---
 
-## Diagrama de clases
+# Integrantes
 
-```txt
-+-------------------+
-|     Cancion       |
-+-------------------+
-| id                |
-| nombre            |
-| artista           |
-| album             |
-| anio              |
-| duracion          |
-| ruta              |
-+-------------------+
+- Enzo Rivera Flores
+- Iván Cosse Viloria
+- Diego Guerra Estay
 
-          ▲
-          |
-+-------------------+
-|      Nodo<T>      |
-+-------------------+
-| dato              |
-| next              |
-+-------------------+
+---
 
-          ▲
-          |
-+--------------------------+
-|   ListaEnlazada<T>       |
-+--------------------------+
-| inicio                   |
-| num                      |
-+--------------------------+
-| insertarFinal()          |
-| obtener()                |
-| eliminar()               |
-| limpiar()                |
-| modificar()              |
-+--------------------------+
+# Descripción
 
-          ▲
-          |
-+--------------------------+
-|      Reproductor         |
-+--------------------------+
-| lista                    |
-| playlist                 |
-| actual                   |
-| Playing                  |
-| mixRand                  |
-| RepeatMode               |
-+--------------------------+
-| playPause()              |
-| Next()                   |
-| Back()                   |
-| toggleMixRand()          |
-| ChangeRepeatMode()       |
-| mostrarActual()          |
-| moverseHaciaCancion()    |
-+--------------------------+
+El objetivo del proyecto es desarrollar un reproductor musical aplicando estructuras de datos implementadas manualmente y programación orientada a objetos.
 
-          ▲
-          |
-+--------------------------+
-|    GestorArchivos        |
-+--------------------------+
-| cargarCanciones()        |
-| guardarEstado()          |
-| cargarEstado()           |
-+--------------------------+
+El sistema permite:
+
+- Reproducir canciones
+- Administrar playlists
+- Buscar canciones por nombre o artista
+- Gestionar un catálogo musical
+- Obtener el Top 10 de artistas y canciones más reproducidas
+
+Todas las estructuras utilizadas fueron implementadas por los integrantes del proyecto, respetando las restricciones del taller.
+
+---
+
+# Funcionalidades
+
+## Reproducción
+
+- Play / Pause
+- Canción siguiente
+- Canción anterior
+- Mostrar canción actual
+- Reproducir canción específica
+
+---
+
+## Playlist
+
+- Visualizar playlist actual
+- Saltar a una canción específica
+- Agregar canciones al final
+- Reordenamiento aleatorio (Shuffle)
+
+---
+
+## Sistema de búsqueda
+
+El proyecto incorpora un "Árbol Trie", permitiendo búsquedas rápidas tanto por:
+
+- Nombre de canción
+- Nombre del artista
+
+La búsqueda funciona mediante **subcadenas**, por ejemplo:
+
+Buscar:
+
+```
+sheeran
+```
+
+Resultado:
+
+```
+Shivers - Ed Sheeran
+Bad Habits - Ed Sheeran
+Perfect - Ed Sheeran
+Shape of You - Ed Sheeran
+```
+
+También funciona para fragmentos internos.
+
+Ejemplo:
+
+```
+wave
+```
+
+Resultado:
+
+```
+Heat Waves
 ```
 
 ---
 
-## Estructura del proyecto
+## Modos de reproducción
 
-```txt
+### Shuffle
+
+- Activa/desactiva reproducción aleatoria.
+- Solo mezcla las canciones restantes de la playlist.
+
+### Repeat
+
+Tres modos disponibles:
+
+- OFF
+- Repeat One
+- Repeat All
+
+---
+
+## Persistencia
+
+El estado del reproductor se guarda automáticamente.
+
+Se conserva:
+
+- Canción actual
+- Estado Play/Pause
+- Shuffle
+- Repeat
+
+Al reiniciar el programa, la reproducción continúa desde el estado anterior.
+
+---
+
+# Estructuras de datos implementadas
+
+## Lista Enlazada
+
+Utilizada para:
+
+- Catálogo de canciones
+- Playlist
+- Resultados de búsqueda
+- Listas auxiliares
+
+Operaciones implementadas:
+
+- Inserción
+- Eliminación
+- Modificación
+- Obtención por índice
+- Limpieza
+- Recorrido
+
+---
+
+## Árbol Trie
+
+Utilizado para indexar:
+
+- Nombre de canciones
+- Nombre de artistas
+
+Características:
+
+- Inserción de todos los sufijos.
+- Búsqueda por cualquier parte del texto.
+- Evita recorrer secuencialmente todas las canciones.
+
+
+## Árbol AVL
+
+Utilizado para almacenar información ordenada de artistas.
+
+Características:
+
+- Árbol auto balanceado.
+- Inserciones eficientes.
+- Mantiene altura logarítmica.
+
+
+```
+
+## Heap
+
+Utilizado para generar:
+
+- Top 10 artistas
+- Top 10 canciones
+
+Permite mantener los elementos con mayor cantidad de reproducciones.
+
+---
+
+# Organización del proyecto
+
 TallerEDD/
 │
 ├── classes/
-│   ├── Cancion.h
-│   ├── Cancion.cpp
-│   ├── Reproductor.h
-│   ├── Reproductor.cpp
-│   ├── GestorArchivos.h
-│   └── GestorArchivos.cpp
+│   ├── Artista.*
+│   ├── Cancion.*
+│   ├── GestorArchivos.*
+│   └── Reproductor.*
 │
 ├── core/
-│   ├── Menu.h
-│   └── Menu.cpp
+│   ├── Menu.*
 │
 ├── data/
 │   ├── music_source.txt
@@ -110,7 +202,12 @@ TallerEDD/
 │
 ├── data_structures/
 │   ├── Nodo.h
-│   └── ListaEnlazada.h
+│   ├── NodoAVL.h
+│   ├── NodoTrie.h
+│   ├── ListaEnlazada.h
+│   ├── ArbolAVL.*
+│   ├── ArbolTrie.*
+│   └── ArbolHeap.*
 │
 ├── main.cpp
 ├── CMakeLists.txt
@@ -119,119 +216,111 @@ TallerEDD/
 
 ---
 
-## Funcionamiento de la aplicación
+# Funcionamiento
 
-El programa inicia cargando las canciones registradas desde el archivo
-`music_source.txt` y el estado previo del reproductor desde `status.cfg`.
+Al iniciar el programa:
 
-El usuario interactúa mediante un menú principal que permite:
+1. Se cargan las canciones desde el archivo de datos.
+2. Se construye el índice Trie.
+3. Se construyen las estructuras auxiliares.
+4. Se restaura el estado del reproductor.
+5. Se muestra el menú principal.
 
-* reproducir o pausar canciones
-* avanzar o retroceder canciones
-* activar modo aleatorio
-* activar modos de repetición
-* gestionar playlists
-* gestionar canciones registradas
-
-El reproductor mantiene dos listas independientes:
-
-* `lista`: catálogo completo de canciones
-* `playlist`: lista de reproducción actual
-
-El estado de reproducción se muestra dinámicamente mediante indicadores como:
-
-```txt
-Reproduciendo (S-R1): Fire Dance - Vivid BAD Squad
-```
-
-Donde:
-
-* `S` representa modo aleatorio activado
-* `R1` representa repetir una canción
-* `RA` representa repetir toda la playlist
+El usuario interactúa mediante comandos de teclado.
 
 ---
 
-## Funcionalidades implementadas
+# Menú principal
 
-### Reproducción
-
-* Play / Pause
-* Siguiente canción
-* Canción anterior
-* Mostrar canción actual
-
-### Playlist
-
-* Visualización de playlist actual
-* Saltar a canción específica (`S<num>`)
-* Agregar canciones al final de la playlist (`A<num>`)
-
-### Registro de canciones
-
-* Mostrar canciones registradas
-* Agregar nuevas canciones (`N`)
-* Eliminar canciones (`D<num>`)
-* Reproducir canción específica (`R<num>`)
-
-### Modos de reproducción
-
-#### Modo Aleatorio
-
-* Se activa/desactiva con `S`
-* Mezcla las canciones restantes de la playlist una sola vez
-
-#### Modo Repetición
-
-* OFF
-* Repetir una (`R1`)
-* Repetir todas (`RA`)
-
-### Persistencia
-
-El programa guarda automáticamente:
-
-* canción actual
-* estado de reproducción
-* modo aleatorio
-* modo repetición
-
-mediante el archivo:
-
-```txt
-status.cfg
 ```
-(Ubicado en "cmake-build-debug")
+W  Reproducir / Pausar
+
+Q  Canción anterior
+
+E  Canción siguiente
+
+S  Shuffle
+
+R  Cambiar modo Repeat
+
+A  Menú Playlist
+
+L  Menú Canciones
+
+F  Buscar canciones
+
+T  Top 10
+
+X  Salir
+```
 
 ---
 
-## Compilación
+# Archivos utilizados
 
-### CLion
+## music_source.txt
 
-Abrir el proyecto con CLion y ejecutar:
+Almacena todas las canciones.
 
-```txt
+Formato:
+
+```
+id,nombre,artista,album,año,duracion,ruta
+```
+
+Ejemplo:
+
+```
+1,Fire Dance,Vivid BAD Squad,...
+```
+
+---
+
+## status.cfg
+
+Guarda el estado del reproductor.
+
+Ejemplo:
+
+```
+current_song=4
+playing=1
+shuffle=0
+repeat=2
+```
+
+---
+
+# Compilación
+
+## CLion
+
+Abrir el proyecto y ejecutar:
+
+```
 Build → Build Project
 ```
 
-### Compilación manual (g++)
+---
+
+## CMake
 
 ```bash
-g++ main.cpp classes/*.cpp core/*.cpp -o NeoPlayer
+cmake .
+cmake --build .
 ```
 
 ---
 
-## Ejecución
+# ▶ Ejecución
 
-### Windows
+Windows
 
-```txt
+```
 PlayerSona.exe
 ```
 
-### Linux / Mac
+Linux
 
 ```bash
 ./PlayerSona
@@ -239,54 +328,14 @@ PlayerSona.exe
 
 ---
 
-## Archivos utilizados
+# Restricciones del proyecto
 
-### music_source.txt
+El proyecto fue desarrollado respetando las condiciones del taller:
 
-Contiene el registro de canciones del programa.
-
-Formato:
-
-```txt
-id,nombre,artista,album,anio,duracion,ruta
-```
-
-Ejemplo:
-
-```txt
-1,Fire Dance,Vivid BAD Squad,Fire Dance Single,2025,210,C:/musica/fire.mp3
-```
-
----
-
-### status.cfg
-
-Guarda el estado actual del reproductor.
-
-Ejemplo:
-
-```txt
-current_song=0
-is_playing=1
-shuffle=0
-repeat_mode=2
-```
-
----
-
-Uso de CMake
-
-El proyecto utiliza CMake para automatizar la compilación de múltiples
-archivos fuente y facilitar el desarrollo dentro de CLion.
-
----
-
-Restricciones del proyecto
-
-El proyecto fue desarrollado respetando las restricciones del taller:
-
-* sin uso de STL para estructuras de datos
-* implementación manual de listas enlazadas
-* uso de templates
-* persistencia mediante archivos
-* programación orientada a objetos
+- Sin utilizar estructuras de datos de la STL.
+- Implementación manual de listas enlazadas.
+- Implementación manual de árboles.
+- Uso de templates.
+- Programación orientada a objetos.
+- Persistencia mediante archivos.
+- Modularización mediante clases.
