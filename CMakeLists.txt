@@ -12,4 +12,6 @@ add_executable(TallerEDD
         data_structures/ArbolTrie.h
         data_structures/ArbolTrie.cpp
         data_structures/NodoTrie.h
+        classes/ArbolHeap.cpp
+        classes/Artista.h
 )
