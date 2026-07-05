@@ -357,7 +357,7 @@ ListaEnlazada<int> Reproductor::buscarCanciones(string texto)
 
 
 int Reproductor::obtenerReproducciones(int idCancion) {
-    ifstream arch("ranking.txt");
+    ifstream arch("../ranking.txt");
     if (!arch.is_open()) {
         return 0;
     }
