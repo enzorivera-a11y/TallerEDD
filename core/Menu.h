@@ -6,5 +6,6 @@ class Reproductor;
 void menuInicial(Reproductor& reproductor);
 void menuPlaylist(Reproductor& reproductor);
 void menuCanciones(Reproductor& reproductor);
+void menuBusqueda(Reproductor& reproductor);
 
 #endif
