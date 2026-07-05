@@ -42,7 +42,7 @@ void ArbolHeap::insertar(CancionRanking item) {
 
 CancionRanking ArbolHeap::obtentermax() {
     if (total == 0) {
-        return {"", "", "", -1};
+        return {-1, "", "", -1};
     }
     CancionRanking maximo = lista[1];
     lista[1] = lista[total];
