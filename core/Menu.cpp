@@ -2,7 +2,8 @@
 #include <cctype>
 #include <limits>
 #include <string>
-
+#include <fstream>
+#include <sstream>
 #include "Menu.h"
 #include "../classes/Reproductor.h"
 #include "../data_structures//ListaEnlazada.h"
@@ -12,6 +13,19 @@ using namespace std;
 
 
 void menuRanking(Reproductor& reproductor) {
+    ifstream verificar("../ranking.txt");
+    if (!verificar.is_open()) {
+        ofstream crear("../ranking.txt");
+        if (crear.is_open()) {
+            ListaEnlazada<Cancion> listaAux = reproductor.getLista();
+            for (int i = 0; i < listaAux.tamano(); i++) {
+                crear << listaAux.obtener(i).id << " 0\n";
+            }
+            crear.close();
+        }
+    } else {
+        verificar.close();
+    }
     char opcion;
     ListaEnlazada<Cancion> listaGeneral = reproductor.getLista();
     int totalCanciones = listaGeneral.tamano();
