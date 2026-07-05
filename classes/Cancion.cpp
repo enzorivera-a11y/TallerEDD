@@ -30,3 +30,6 @@ std::string Cancion::getNombre() {
 std::string Cancion::getArtista() {
     return artista;
 }
+int Cancion::getID(){
+    return id;
+}
