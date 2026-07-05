@@ -124,7 +124,7 @@ Al reiniciar el programa, la reproducción continúa desde el estado anterior.
 ---
 # Dato respecto a la función de TOP 10
 
-A la hora de ejecutar el programa, y la función T, se creará un archivo llamado "ranking.txt", el cuál se usará para almacenar los tops del ranking (Canciones y Artistas), y mantendrá los datos hasta que el archivo se borre de nuevo
+A la hora de ejecutar el programa, y la función T, el archivo "ranking.txt" iniciará vacío, el cuál se usará para almacenar los tops del ranking (Canciones y Artistas), y mantendrá los datos de forma persistente
 
 ---
 # Estructuras de datos implementadas
