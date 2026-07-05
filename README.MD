@@ -122,7 +122,11 @@ Se conserva:
 Al reiniciar el programa, la reproducción continúa desde el estado anterior.
 
 ---
+# Dato respecto a la función de TOP 10
 
+A la hora de ejecutar el programa, y la función T, se creará un archivo llamado "ranking.txt", el cuál se usará para almacenar los tops del ranking (Canciones y Artistas), y mantendrá los datos hasta que el archivo se borre de nuevo
+
+---
 # Estructuras de datos implementadas
 
 ## Lista Enlazada
@@ -182,6 +186,192 @@ Utilizado para generar:
 Permite mantener los elementos con mayor cantidad de reproducciones.
 
 ---
+# Diagrama de clases
+
++--------------------------------------------------+
+|                    Cancion                       |
++--------------------------------------------------+
+| - id                                             |
+| - nombre                                         |
+| - artista                                        |
+| - album                                          |
+| - anio                                           |
+| - duracion                                       |
+| - ruta                                           |
++--------------------------------------------------+
+| +getNombre()                                     |
+| +getArtista()                                    |
+| +...                                             |
++--------------------------------------------------+
+
+
+                 ▲
+                 │
+        dato     │
++----------------+----------------+
+|            Nodo<T>              |
++---------------------------------+
+| dato                            |
+| next                            |
++---------------------------------+
+
+
+                 ▲
+                 │
++-----------------------------------------------+
+|          ListaEnlazada<T>                     |
++-----------------------------------------------+
+| cabeza                                        |
+| cantidad                                      |
++-----------------------------------------------+
+| insertarFinal()                               |
+| insertarInicio()                              |
+| obtener()                                     |
+| eliminar()                                    |
+| mod()                                         |
+| tamano()                                      |
+| clean()                                       |
++-----------------------------------------------+
+
+
+
++------------------------------------------------+
+|                  NodoTrie                      |
++------------------------------------------------+
+| hijos[256]                                     |
+| canciones : ListaEnlazada<int>                 |
++------------------------------------------------+
+
+
+                 ▲
+                 │
++------------------------------------------------+
+|                 ArbolTrie                      |
++------------------------------------------------+
+| raiz                                           |
++------------------------------------------------+
+| insertar()                                     |
+| buscar()                                       |
+| insertarSufijos()                              |
+| minusculas()                                   |
++------------------------------------------------+
+
+
+
++------------------------------------------------+
+|                   Artista                      |
++------------------------------------------------+
+| nombre                                         |
+| reproducciones                                 |
++------------------------------------------------+
+| aumentarReproducciones()                       |
+| getNombre()                                    |
+| getReproducciones()                            |
++------------------------------------------------+
+
+
+
++------------------------------------------------+
+|                NodoAVL                         |
++------------------------------------------------+
+| artista                                        |
+| izquierda                                      |
+| derecha                                        |
+| altura                                         |
++------------------------------------------------+
+
+
+
+                 ▲
+                 │
++------------------------------------------------+
+|                  ArbolAVL                      |
++------------------------------------------------+
+| raiz                                           |
++------------------------------------------------+
+| insertar()                                     |
+| buscar()                                       |
+| rotacionIzquierda()                            |
+| rotacionDerecha()                              |
+| top10()                                        |
++------------------------------------------------+
+
+
+
++------------------------------------------------+
+|                Reproductor                     |
++------------------------------------------------+
+| lista                                          |
+| playlist                                       |
+| actual                                         |
+| Playing                                        |
+| mixRand                                        |
+| RepeatMode                                     |
+| A_canciones : ArbolTrie                        |
+| A_artistas  : ArbolAVL                         |
++------------------------------------------------+
+| playPause()                                    |
+| Next()                                         |
+| Back()                                         |
+| playSong()                                     |
+| agregarSong()                                  |
+| toggleMixRand()                                |
+| ChangeRepeatMode()                             |
+| buscarCanciones()                              |
+| construirIndiceBusqueda()                      |
+| mostrarActual()                                |
++------------------------------------------------+
+
+
+
++------------------------------------------------+
+|              GestorArchivos                    |
++------------------------------------------------+
+| cargarCanciones()                              |
+| guardarEstado()                                |
+| cargarEstado()                                 |
+| guardarCanciones()                             |
++------------------------------------------------+
+
+
+
++------------------------------------------------+
+|                    Menu                        |
++------------------------------------------------+
+| menuInicial()                                  |
+| menuPlaylist()                                 |
+| menuCanciones()                                |
+| menuBusqueda()                                 |
+| leerChar()                                     |
+| leerLinea()                                    |
+| leerComando()                                  |
++------------------------------------------------+
+
+---
+# Relaciones Principales
+
+Menu
+ │
+ ▼
+Reproductor
+ ├────────────► ListaEnlazada<Cancion> (lista)
+ ├────────────► ListaEnlazada<Cancion> (playlist)
+ ├────────────► ArbolTrie
+ ├────────────► ArbolAVL
+ └────────────► Cancion
+
+ArbolTrie
+ └────────────► NodoTrie
+
+ListaEnlazada
+ └────────────► Nodo<T>
+
+ArbolAVL
+ └────────────► NodoAVL
+
+GestorArchivos
+ └────────────► Cancion
+
 
 # Organización del proyecto
 
@@ -214,7 +404,6 @@ TallerEDD/
 └── README.md
 ```
 
----
 
 # Funcionamiento
 
